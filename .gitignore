@@ -1,2 +1,9 @@
-dataset/
-dataset/
+# Ignore everything in dataset
+/dataset/*
+
+# But do not ignore these two
+!/dataset/prompt_bank/
+!/dataset/prompt_bank/**
+
+!/dataset/Nasdaq100/
+!/dataset/Nasdaq100/**

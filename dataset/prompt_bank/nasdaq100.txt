@@ -1,0 +1,1 @@
+Given the past {seq_len} days of stock data with columns [Open, High, Low, Close, Volume], predict the next {pred_len} days of Close values.
