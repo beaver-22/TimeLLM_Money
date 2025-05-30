@@ -1,0 +1,11 @@
+Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+Traceback (most recent call last):
+  File "/container/volume_data/Time-LLM/run_main.py", line 143, in <module>
+    train_data, train_loader = data_provider(args, 'train')
+  File "/container/volume_data/Time-LLM/data_provider/data_factory.py", line 47, in data_provider
+    data_set = Data(
+  File "/container/volume_data/Time-LLM/data_provider/data_loader.py", line 245, in __init__
+    self.__read_data__()
+  File "/container/volume_data/Time-LLM/data_provider/data_loader.py", line 259, in __read_data__
+    cols.remove(self.target)
+ValueError: list.remove(x): x not in list

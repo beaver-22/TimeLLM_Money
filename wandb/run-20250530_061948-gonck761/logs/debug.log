@@ -1,0 +1,23 @@
+2025-05-30 06:19:48,381 INFO    MainThread:11536 [wandb_setup.py:_flush():67] Current SDK version is 0.19.9
+2025-05-30 06:19:48,381 INFO    MainThread:11536 [wandb_setup.py:_flush():67] Configure stats pid to 11536
+2025-05-30 06:19:48,381 INFO    MainThread:11536 [wandb_setup.py:_flush():67] Loading settings from /root/.config/wandb/settings
+2025-05-30 06:19:48,381 INFO    MainThread:11536 [wandb_setup.py:_flush():67] Loading settings from /container/volume_data/Time-LLM/wandb/settings
+2025-05-30 06:19:48,381 INFO    MainThread:11536 [wandb_setup.py:_flush():67] Loading settings from environment variables
+2025-05-30 06:19:48,381 INFO    MainThread:11536 [wandb_init.py:setup_run_log_directory():662] Logging user logs to /container/volume_data/Time-LLM/wandb/run-20250530_061948-gonck761/logs/debug.log
+2025-05-30 06:19:48,381 INFO    MainThread:11536 [wandb_init.py:setup_run_log_directory():663] Logging internal logs to /container/volume_data/Time-LLM/wandb/run-20250530_061948-gonck761/logs/debug-internal.log
+2025-05-30 06:19:48,381 INFO    MainThread:11536 [wandb_init.py:init():781] calling init triggers
+2025-05-30 06:19:48,381 INFO    MainThread:11536 [wandb_init.py:init():786] wandb.init called with sweep_config: {}
+config: {'task_name': 'long_term_forecast', 'is_training': 1, 'model_id': 'nasdaq100_512_96', 'model_comment': 'TimeLLM-Money', 'model': 'TimeLLM', 'seed': 2021, 'data': 'nasdaq100', 'root_path': './dataset/Nasdaq100/', 'data_path': 'nasdaq100.csv', 'features': 'M', 'target': 'Close', 'loader': 'modal', 'freq': 'h', 'checkpoints': './checkpoints/', 'seq_len': 512, 'label_len': 48, 'pred_len': 96, 'seasonal_patterns': 'Monthly', 'enc_in': 5, 'dec_in': 5, 'c_out': 5, 'd_model': 32, 'n_heads': 8, 'e_layers': 2, 'd_layers': 1, 'd_ff': 128, 'moving_avg': 25, 'factor': 3, 'dropout': 0.1, 'embed': 'timeF', 'activation': 'gelu', 'output_attention': False, 'patch_len': 16, 'stride': 8, 'prompt_domain': 0, 'llm_model': 'LLAMA', 'llm_dim': 4096, 'num_workers': 10, 'itr': 1, 'train_epochs': 10, 'align_epochs': 10, 'batch_size': 4, 'eval_batch_size': 8, 'patience': 10, 'learning_rate': 0.01, 'des': 'Exp', 'loss': 'MSE', 'lradj': 'type1', 'pct_start': 0.2, 'use_amp': False, 'llm_layers': 8, 'percent': 100, 'use_wandb': True, 'wandb_iter': 1, 'exp_name': 'TimeLLM-Money', 'project_name': 'TimeLLM', 'entity': 'beaver22-seoul-national-university', '_wandb': {}}
+2025-05-30 06:19:48,381 INFO    MainThread:11536 [wandb_init.py:init():809] starting backend
+2025-05-30 06:19:48,381 INFO    MainThread:11536 [wandb_init.py:init():813] sending inform_init request
+2025-05-30 06:19:48,384 INFO    MainThread:11536 [backend.py:_multiprocessing_setup():101] multiprocessing start_methods=fork,spawn,forkserver, using: spawn
+2025-05-30 06:19:48,384 INFO    MainThread:11536 [wandb_init.py:init():823] backend started and connected
+2025-05-30 06:19:48,385 INFO    MainThread:11536 [wandb_init.py:init():915] updated telemetry
+2025-05-30 06:19:48,390 INFO    MainThread:11536 [wandb_init.py:init():939] communicating run to backend with 90.0 second timeout
+2025-05-30 06:19:49,184 INFO    MainThread:11536 [wandb_init.py:init():1014] starting run threads in backend
+2025-05-30 06:19:49,358 INFO    MainThread:11536 [wandb_run.py:_console_start():2454] atexit reg
+2025-05-30 06:19:49,359 INFO    MainThread:11536 [wandb_run.py:_redirect():2306] redirect: wrap_raw
+2025-05-30 06:19:49,359 INFO    MainThread:11536 [wandb_run.py:_redirect():2371] Wrapping output streams.
+2025-05-30 06:19:49,359 INFO    MainThread:11536 [wandb_run.py:_redirect():2394] Redirects installed.
+2025-05-30 06:19:49,361 INFO    MainThread:11536 [wandb_init.py:init():1056] run started, returning control to user process
+2025-05-30 06:25:50,727 INFO    MsgRouterThr:11536 [mailbox.py:close():129] [no run ID] Closing mailbox, abandoning 1 handles.
