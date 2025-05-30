@@ -2,6 +2,7 @@ import argparse
 import torch
 from accelerate import Accelerator, DeepSpeedPlugin
 from accelerate import DistributedDataParallelKwargs
+import wandb
 from torch import nn, optim
 from torch.optim import lr_scheduler
 from tqdm import tqdm
@@ -76,7 +77,7 @@ parser.add_argument('--activation', type=str, default='gelu', help='activation')
 parser.add_argument('--output_attention', action='store_true', help='whether to output attention in encoder')
 parser.add_argument('--patch_len', type=int, default=16, help='patch length')
 parser.add_argument('--stride', type=int, default=8, help='stride')
-parser.add_argument('--prompt_domain', type=int, default=0, help='')
+parser.add_argument('--prompt_domain', type=int, default=0, help='')  # prompt as prefix 부분
 parser.add_argument('--llm_model', type=str, default='LLAMA', help='LLM model') # LLAMA, GPT2, BERT
 parser.add_argument('--llm_dim', type=int, default='4096', help='LLM model dimension')# LLama7b:4096; GPT2-small:768; BERT-base:768
 
@@ -98,7 +99,23 @@ parser.add_argument('--use_amp', action='store_true', help='use automatic mixed 
 parser.add_argument('--llm_layers', type=int, default=6)
 parser.add_argument('--percent', type=int, default=100)
 
+# Wandb
+parser.add_argument('--use_wandb', action='store_true', help='whether to log to Weights & Biases')
+parser.add_argument('--wandb_iter', type=int, default=1, help='experiment iteration number')
+parser.add_argument('--exp_name', type=str, default='run', help='W&B run name')
+parser.add_argument('--project_name', type=str, default='TimeLLM', help='W&B project')
+parser.add_argument('--entity', type=str, default='beaver22-seoul-national-university', help='W&B entity')
+
+
 args = parser.parse_args()
+if args.use_wandb:
+    wandb.init(
+        project=args.project_name,
+        entity=args.entity,
+        name=args.exp_name,
+        config=vars(args)
+    )
+
 ddp_kwargs = DistributedDataParallelKwargs(find_unused_parameters=True)
 deepspeed_plugin = DeepSpeedPlugin(hf_ds_config='./ds_config_zero2.json')
 accelerator = Accelerator(kwargs_handlers=[ddp_kwargs], deepspeed_plugin=deepspeed_plugin)
@@ -143,6 +160,7 @@ for ii in range(args.itr):
     time_now = time.time()
 
     train_steps = len(train_loader)
+    print(">> One epoch will run", train_steps, "iterations")
     early_stopping = EarlyStopping(accelerator=accelerator, patience=args.patience)
 
     trained_parameters = []
@@ -217,13 +235,24 @@ for ii in range(args.itr):
                 train_loss.append(loss.item())
 
             if (i + 1) % 100 == 0:
+                # 최근 100개 loss 평균 계산
+                recent_losses = train_loss[-100:]
+                avg_loss_100 = sum(recent_losses) / len(recent_losses)
                 accelerator.print(
-                    "\titers: {0}, epoch: {1} | loss: {2:.7f}".format(i + 1, epoch + 1, loss.item()))
+                    f"\titers: {i+1}, epoch: {epoch+1} | avg loss (last 100 iters): {avg_loss_100:.7f}"
+                )
                 speed = (time.time() - time_now) / iter_count
                 left_time = speed * ((args.train_epochs - epoch) * train_steps - i)
                 accelerator.print('\tspeed: {:.4f}s/iter; left time: {:.4f}s'.format(speed, left_time))
                 iter_count = 0
                 time_now = time.time()
+                # W&B에 100-iter 단위 평균 손실 로깅
+                if accelerator.is_local_main_process and args.use_wandb:
+                    wandb.log({
+                        "train_loss_100": avg_loss_100,
+                        "iter": i+1,
+                        "epoch": epoch+1
+                    }, step=epoch * train_steps + i + 1)
 
             if args.use_amp:
                 scaler.scale(loss).backward()
@@ -241,6 +270,19 @@ for ii in range(args.itr):
         train_loss = np.average(train_loss)
         vali_loss, vali_mae_loss = vali(args, accelerator, model, vali_data, vali_loader, criterion, mae_metric)
         test_loss, test_mae_loss = vali(args, accelerator, model, test_data, test_loader, criterion, mae_metric)
+
+        # W&B에 메트릭 로깅
+        if accelerator.is_local_main_process and args.use_wandb:
+            print("[DEBUG] about to wandb.log()") 
+            wandb.log({
+                "epoch": epoch+1,
+                "train_loss": train_loss,
+                "vali_loss": vali_loss,
+                "test_loss": test_loss,
+                "test_mae": test_mae_loss,
+                "lr": model_optim.param_groups[0]['lr'],
+                "itr": args.wandb_iter
+            })
         accelerator.print(
             "Epoch: {0} | Train Loss: {1:.7f} Vali Loss: {2:.7f} Test Loss: {3:.7f} MAE Loss: {4:.7f}".format(
                 epoch + 1, train_loss, vali_loss, test_loss, test_mae_loss))
@@ -266,5 +308,7 @@ for ii in range(args.itr):
 accelerator.wait_for_everyone()
 if accelerator.is_local_main_process:
     path = './checkpoints'  # unique checkpoint saving path
+    if args.use_wandb:
+        wandb.finish()
     del_files(path)  # delete checkpoint files
     accelerator.print('success delete checkpoints')

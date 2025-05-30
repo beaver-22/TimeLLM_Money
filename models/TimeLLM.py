@@ -61,7 +61,7 @@ class Model(nn.Module):
                     # "/mnt/alps/modelhub/pretrained_model/LLaMA/7B_hf/",
                     'huggyllama/llama-7b',
                     trust_remote_code=True,
-                    local_files_only=False,
+                    local_files_only=False,  # 이 부분이 False이므로 자동으로 llama 다운로드함
                     config=self.llama_config,
                     # load_in_4bit=True
                 )

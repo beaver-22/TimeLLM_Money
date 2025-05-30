@@ -207,10 +207,19 @@ class Dataset_ETT_minute(Dataset):
 
 
 class Dataset_Custom(Dataset):
-    def __init__(self, root_path, flag='train', size=None,
-                 features='S', data_path='ETTh1.csv',
-                 target='OT', scale=True, timeenc=0, freq='h', percent=100,
-                 seasonal_patterns=None):
+    def __init__(self,
+             root_path,        # CSV 파일이 있는 디렉터리 경로
+             flag='train',     # 'train', 'val', 'test' 중 하나
+             size=None,        # [seq_len, label_len, pred_len]
+             features='S',     # 'S'(단일), 'M'(다중), 'MS'(다중+스케일)
+             data_path='ETTh1.csv',  # 불러올 CSV 파일명
+             target='OT',      # 예측 대상 컬럼명
+             scale=True,       # 표준화 적용 여부
+             timeenc=0,        # 시간 인코딩 방식(0: 범주형, 1: 연속형)
+             freq='h',         # 시계열 빈도(예: 'h', 'd', '1d' 등)
+             percent=100,      # train 구간 비율 조정(데이터 증감용)
+             seasonal_patterns=None):
+
         if size == None:
             self.seq_len = 24 * 4 * 4
             self.label_len = 24 * 4
@@ -248,11 +257,11 @@ class Dataset_Custom(Dataset):
         '''
         cols = list(df_raw.columns)
         cols.remove(self.target)
-        cols.remove('date')
+        cols.remove('date')  # dataset 첫째열 date로 만들어야함
         df_raw = df_raw[['date'] + cols + [self.target]]
-        num_train = int(len(df_raw) * 0.7)
-        num_test = int(len(df_raw) * 0.2)
-        num_vali = len(df_raw) - num_train - num_test
+        num_train = int(len(df_raw) * 0.7) # train 70%
+        num_test = int(len(df_raw) * 0.2)  # test 20%
+        num_vali = len(df_raw) - num_train - num_test  # vali 10%
         border1s = [0, num_train - self.seq_len, len(df_raw) - num_test - self.seq_len]
         border2s = [num_train, num_train + num_vali, len(df_raw)]
         border1 = border1s[self.set_type]
@@ -269,7 +278,7 @@ class Dataset_Custom(Dataset):
 
         if self.scale:
             train_data = df_data[border1s[0]:border2s[0]]
-            self.scaler.fit(train_data.values)
+            self.scaler.fit(train_data.values)  # Standard Scaler
             data = self.scaler.transform(df_data.values)
         else:
             data = df_data.values
@@ -286,12 +295,13 @@ class Dataset_Custom(Dataset):
             data_stamp = time_features(pd.to_datetime(df_stamp['date'].values), freq=self.freq)
             data_stamp = data_stamp.transpose(1, 0)
 
-        self.data_x = data[border1:border2]
+        #train-vali-test로 데이터 분할해서 저장함
+        self.data_x = data[border1:border2] 
         self.data_y = data[border1:border2]
         self.data_stamp = data_stamp
 
-    def __getitem__(self, index):
-        feat_id = index // self.tot_len
+    def __getitem__(self, index):  #슬라이딩 윈도우 방식으로 (입쳑, 라벨+예측 생성)
+        feat_id = index // self.tot_len  # 멀티채널일 때 어느 채널인지 결정
         s_begin = index % self.tot_len
 
         s_end = s_begin + self.seq_len

@@ -1,0 +1,8 @@
+Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+Loading checkpoint shards: 100%|███████████████████████████████| 2/2 [00:01<00:00,  1.83it/s]
+Traceback (most recent call last):
+  File "/container/volume_data/Time-LLM/run_main.py", line 156, in <module>
+    args.content = load_content(args)
+  File "/container/volume_data/Time-LLM/utils/tools.py", line 231, in load_content
+    with open('./dataset/prompt_bank/{0}.txt'.format(file), 'r') as f:
+FileNotFoundError: [Errno 2] No such file or directory: './dataset/prompt_bank/nasdaq100.txt'
