@@ -1,0 +1,53 @@
+Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+Loading checkpoint shards: 100%|█████████████████████████████████████| 4/4 [00:14<00:00,  3.57s/it]
+>> One epoch will run 5907 iterations
+Traceback (most recent call last):
+  File "/container/volume_data/Time-LLM/run_main.py", line 185, in <module>
+    train_loader, vali_loader, test_loader, model, model_optim, scheduler = accelerator.prepare(
+  File "/opt/conda/lib/python3.10/site-packages/accelerate/accelerator.py", line 1326, in prepare
+    result = tuple(
+  File "/opt/conda/lib/python3.10/site-packages/accelerate/accelerator.py", line 1327, in <genexpr>
+    self._prepare_one(obj, first_pass=True, device_placement=d) for obj, d in zip(args, device_placement)
+  File "/opt/conda/lib/python3.10/site-packages/accelerate/accelerator.py", line 1200, in _prepare_one
+    return self.prepare_model(obj, device_placement=device_placement)
+  File "/opt/conda/lib/python3.10/site-packages/accelerate/accelerator.py", line 1433, in prepare_model
+    model = model.to(self.device)
+  File "/opt/conda/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1355, in to
+    return self._apply(convert)
+  File "/opt/conda/lib/python3.10/site-packages/torch/nn/modules/module.py", line 915, in _apply
+    module._apply(fn)
+  File "/opt/conda/lib/python3.10/site-packages/torch/nn/modules/module.py", line 915, in _apply
+    module._apply(fn)
+  File "/opt/conda/lib/python3.10/site-packages/torch/nn/modules/module.py", line 915, in _apply
+    module._apply(fn)
+  [Previous line repeated 2 more times]
+  File "/opt/conda/lib/python3.10/site-packages/torch/nn/modules/module.py", line 942, in _apply
+    param_applied = fn(param)
+  File "/opt/conda/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1341, in convert
+    return t.to(
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 224.00 MiB. GPU 0 has a total capacity of 10.75 GiB of which 114.06 MiB is free. Process 20909 has 10.62 GiB memory in use. Of the allocated memory 9.86 GiB is allocated by PyTorch, and 1.72 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Traceback (most recent call last):
+  File "/container/volume_data/Time-LLM/run_main.py", line 185, in <module>
+    train_loader, vali_loader, test_loader, model, model_optim, scheduler = accelerator.prepare(
+  File "/opt/conda/lib/python3.10/site-packages/accelerate/accelerator.py", line 1326, in prepare
+    result = tuple(
+  File "/opt/conda/lib/python3.10/site-packages/accelerate/accelerator.py", line 1327, in <genexpr>
+    self._prepare_one(obj, first_pass=True, device_placement=d) for obj, d in zip(args, device_placement)
+  File "/opt/conda/lib/python3.10/site-packages/accelerate/accelerator.py", line 1200, in _prepare_one
+    return self.prepare_model(obj, device_placement=device_placement)
+  File "/opt/conda/lib/python3.10/site-packages/accelerate/accelerator.py", line 1433, in prepare_model
+    model = model.to(self.device)
+  File "/opt/conda/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1355, in to
+    return self._apply(convert)
+  File "/opt/conda/lib/python3.10/site-packages/torch/nn/modules/module.py", line 915, in _apply
+    module._apply(fn)
+  File "/opt/conda/lib/python3.10/site-packages/torch/nn/modules/module.py", line 915, in _apply
+    module._apply(fn)
+  File "/opt/conda/lib/python3.10/site-packages/torch/nn/modules/module.py", line 915, in _apply
+    module._apply(fn)
+  [Previous line repeated 2 more times]
+  File "/opt/conda/lib/python3.10/site-packages/torch/nn/modules/module.py", line 942, in _apply
+    param_applied = fn(param)
+  File "/opt/conda/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1341, in convert
+    return t.to(
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 224.00 MiB. GPU 0 has a total capacity of 10.75 GiB of which 114.06 MiB is free. Process 20909 has 10.62 GiB memory in use. Of the allocated memory 9.86 GiB is allocated by PyTorch, and 1.72 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)

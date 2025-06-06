@@ -1,0 +1,150 @@
+_wandb:
+    value:
+        cli_version: 0.19.9
+        m: []
+        python_version: 3.10.13
+        t:
+            "1":
+                - 1
+                - 5
+                - 11
+                - 41
+                - 49
+                - 53
+                - 55
+                - 71
+            "2":
+                - 1
+                - 5
+                - 11
+                - 41
+                - 49
+                - 53
+                - 55
+                - 71
+            "3":
+                - 13
+                - 16
+                - 23
+                - 55
+            "4": 3.10.13
+            "5": 0.19.9
+            "6": 4.51.0
+            "8":
+                - 5
+            "12": 0.19.9
+            "13": linux-x86_64
+activation:
+    value: gelu
+align_epochs:
+    value: 10
+batch_size:
+    value: 4
+c_out:
+    value: 5
+checkpoints:
+    value: ./checkpoints/
+d_ff:
+    value: 128
+d_layers:
+    value: 1
+d_model:
+    value: 32
+data:
+    value: nasdaq100
+data_path:
+    value: nasdaq100.csv
+dec_in:
+    value: 5
+des:
+    value: Exp
+dropout:
+    value: 0.1
+e_layers:
+    value: 2
+embed:
+    value: timeF
+enc_in:
+    value: 5
+entity:
+    value: beaver22-seoul-national-university
+eval_batch_size:
+    value: 8
+exp_name:
+    value: TimeLLM-Money
+factor:
+    value: 3
+features:
+    value: MS
+freq:
+    value: h
+is_training:
+    value: 1
+itr:
+    value: 1
+label_len:
+    value: 48
+learning_rate:
+    value: 0.01
+llm_dim:
+    value: 4096
+llm_layers:
+    value: 6
+llm_model:
+    value: LLAMA3.1
+loader:
+    value: modal
+loss:
+    value: MSE
+lradj:
+    value: type1
+model:
+    value: TimeLLM
+model_comment:
+    value: TimeLLM-Money
+model_id:
+    value: nasdaq100_512_48
+moving_avg:
+    value: 25
+n_heads:
+    value: 8
+num_workers:
+    value: 10
+output_attention:
+    value: false
+patch_len:
+    value: 16
+patience:
+    value: 10
+pct_start:
+    value: 0.2
+percent:
+    value: 100
+pred_len:
+    value: 48
+project_name:
+    value: TimeLLM
+prompt_domain:
+    value: 0
+root_path:
+    value: ./dataset/Nasdaq100/
+seasonal_patterns:
+    value: Monthly
+seed:
+    value: 2021
+seq_len:
+    value: 512
+stride:
+    value: 8
+target:
+    value: Close
+task_name:
+    value: long_term_forecast
+train_epochs:
+    value: 1
+use_amp:
+    value: false
+use_wandb:
+    value: true
+wandb_iter:
+    value: 1

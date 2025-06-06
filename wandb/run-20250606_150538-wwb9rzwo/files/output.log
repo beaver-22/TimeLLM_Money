@@ -1,0 +1,21 @@
+Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+Traceback (most recent call last):
+  File "/container/volume_data/Time-LLM/run_main.py", line 152, in <module>
+    model = TimeLLM.Model(args).float()
+  File "/container/volume_data/Time-LLM/models/TimeLLM.py", line 97, in __init__
+    self.llm_model = LlamaModel.from_pretrained(
+  File "/opt/conda/lib/python3.10/site-packages/transformers/modeling_utils.py", line 309, in _wrapper
+    return func(*args, **kwargs)
+  File "/opt/conda/lib/python3.10/site-packages/transformers/modeling_utils.py", line 4447, in from_pretrained
+    and checkpoint_files[0].endswith(".safetensors")
+AttributeError: 'NoneType' object has no attribute 'endswith'
+Traceback (most recent call last):
+  File "/container/volume_data/Time-LLM/run_main.py", line 152, in <module>
+    model = TimeLLM.Model(args).float()
+  File "/container/volume_data/Time-LLM/models/TimeLLM.py", line 97, in __init__
+    self.llm_model = LlamaModel.from_pretrained(
+  File "/opt/conda/lib/python3.10/site-packages/transformers/modeling_utils.py", line 309, in _wrapper
+    return func(*args, **kwargs)
+  File "/opt/conda/lib/python3.10/site-packages/transformers/modeling_utils.py", line 4447, in from_pretrained
+    and checkpoint_files[0].endswith(".safetensors")
+AttributeError: 'NoneType' object has no attribute 'endswith'

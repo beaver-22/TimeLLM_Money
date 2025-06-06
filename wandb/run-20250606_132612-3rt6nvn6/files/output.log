@@ -1,0 +1,36 @@
+Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+Loading checkpoint shards: 100%|████████████████████████████████| 2/2 [00:03<00:00,  1.77s/it]
+>> One epoch will run 1488 iterations
+[2025-06-06 13:27:08,769] [INFO] [real_accelerator.py:191:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[2025-06-06 13:27:08,967] [INFO] [logging.py:96:log_dist] [Rank -1] DeepSpeed info: version=0.14.0, git-hash=unknown, git-branch=unknown
+[2025-06-06 13:27:08,967] [INFO] [comm.py:637:init_distributed] cdb=None
+[2025-06-06 13:27:08,967] [INFO] [comm.py:652:init_distributed] Not using the DeepSpeed or dist launchers, attempting to detect MPI environment...
+[2025-06-06 13:27:09,451] [INFO] [comm.py:702:mpi_discovery] Discovered MPI settings of world_rank=0, local_rank=0, world_size=1, master_addr=172.17.0.3, master_port=29500
+[2025-06-06 13:27:09,451] [INFO] [comm.py:668:init_distributed] Initializing TorchBackend in DeepSpeed with backend nccl
+Traceback (most recent call last):
+  File "/container/volume_data/Time-LLM/run_main.py", line 185, in <module>
+    train_loader, vali_loader, test_loader, model, model_optim, scheduler = accelerator.prepare(
+  File "/opt/conda/lib/python3.10/site-packages/accelerate/accelerator.py", line 1255, in prepare
+    result = self._prepare_deepspeed(*args)
+  File "/opt/conda/lib/python3.10/site-packages/accelerate/accelerator.py", line 1640, in _prepare_deepspeed
+    engine, optimizer, _, lr_scheduler = deepspeed.initialize(**kwargs)
+  File "/opt/conda/lib/python3.10/site-packages/deepspeed/__init__.py", line 176, in initialize
+    engine = DeepSpeedEngine(args=args,
+  File "/opt/conda/lib/python3.10/site-packages/deepspeed/runtime/engine.py", line 262, in __init__
+    self._configure_distributed_model(model)
+  File "/opt/conda/lib/python3.10/site-packages/deepspeed/runtime/engine.py", line 1112, in _configure_distributed_model
+    self.module.to(self.device)
+  File "/opt/conda/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1152, in to
+    return self._apply(convert)
+  File "/opt/conda/lib/python3.10/site-packages/torch/nn/modules/module.py", line 802, in _apply
+    module._apply(fn)
+  File "/opt/conda/lib/python3.10/site-packages/torch/nn/modules/module.py", line 802, in _apply
+    module._apply(fn)
+  File "/opt/conda/lib/python3.10/site-packages/torch/nn/modules/module.py", line 802, in _apply
+    module._apply(fn)
+  [Previous line repeated 2 more times]
+  File "/opt/conda/lib/python3.10/site-packages/torch/nn/modules/module.py", line 825, in _apply
+    param_applied = fn(param)
+  File "/opt/conda/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1150, in convert
+    return t.to(device, dtype if t.is_floating_point() or t.is_complex() else None, non_blocking)
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 32.00 MiB. GPU 0 has a total capacity of 10.75 GiB of which 28.06 MiB is free. Process 2817 has 10.70 GiB memory in use. Of the allocated memory 10.13 GiB is allocated by PyTorch, and 1.58 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)

@@ -1,0 +1,60 @@
+Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+Loading checkpoint shards: 100%|█████████████████████████████████████| 2/2 [00:00<00:00,  2.74it/s]
+>> One epoch will run 5907 iterations
+[2025-06-06 16:31:31,617] [INFO] [real_accelerator.py:191:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+Traceback (most recent call last):
+  File "/container/volume_data/Time-LLM/run_main.py", line 185, in <module>
+    train_loader, vali_loader, test_loader, model, model_optim, scheduler = accelerator.prepare(
+  File "/opt/conda/lib/python3.10/site-packages/accelerate/accelerator.py", line 1255, in prepare
+    result = self._prepare_deepspeed(*args)
+  File "/opt/conda/lib/python3.10/site-packages/accelerate/accelerator.py", line 1455, in _prepare_deepspeed
+    import deepspeed
+  File "/opt/conda/lib/python3.10/site-packages/deepspeed/__init__.py", line 26, in <module>
+    from . import module_inject
+  File "/opt/conda/lib/python3.10/site-packages/deepspeed/module_inject/__init__.py", line 6, in <module>
+    from .replace_module import replace_transformer_layer, revert_transformer_layer, ReplaceWithTensorSlicing, GroupQuantizer, generic_injection
+  File "/opt/conda/lib/python3.10/site-packages/deepspeed/module_inject/replace_module.py", line 607, in <module>
+    from ..pipe import PipelineModule
+  File "/opt/conda/lib/python3.10/site-packages/deepspeed/pipe/__init__.py", line 6, in <module>
+    from ..runtime.pipe import PipelineModule, LayerSpec, TiedLayerSpec
+  File "/opt/conda/lib/python3.10/site-packages/deepspeed/runtime/pipe/__init__.py", line 6, in <module>
+    from .module import PipelineModule, LayerSpec, TiedLayerSpec
+  File "/opt/conda/lib/python3.10/site-packages/deepspeed/runtime/pipe/module.py", line 19, in <module>
+    from ..activation_checkpointing import checkpointing
+  File "/opt/conda/lib/python3.10/site-packages/deepspeed/runtime/activation_checkpointing/checkpointing.py", line 26, in <module>
+    from deepspeed.runtime.config import DeepSpeedConfig
+  File "/opt/conda/lib/python3.10/site-packages/deepspeed/runtime/config.py", line 42, in <module>
+    from ..elasticity import (
+  File "/opt/conda/lib/python3.10/site-packages/deepspeed/elasticity/__init__.py", line 10, in <module>
+    from .elastic_agent import DSElasticAgent
+  File "/opt/conda/lib/python3.10/site-packages/deepspeed/elasticity/elastic_agent.py", line 9, in <module>
+    from torch.distributed.elastic.agent.server.api import log, _get_socket_with_port
+ImportError: cannot import name 'log' from 'torch.distributed.elastic.agent.server.api' (/opt/conda/lib/python3.10/site-packages/torch/distributed/elastic/agent/server/api.py)
+Traceback (most recent call last):
+  File "/container/volume_data/Time-LLM/run_main.py", line 185, in <module>
+    train_loader, vali_loader, test_loader, model, model_optim, scheduler = accelerator.prepare(
+  File "/opt/conda/lib/python3.10/site-packages/accelerate/accelerator.py", line 1255, in prepare
+    result = self._prepare_deepspeed(*args)
+  File "/opt/conda/lib/python3.10/site-packages/accelerate/accelerator.py", line 1455, in _prepare_deepspeed
+    import deepspeed
+  File "/opt/conda/lib/python3.10/site-packages/deepspeed/__init__.py", line 26, in <module>
+    from . import module_inject
+  File "/opt/conda/lib/python3.10/site-packages/deepspeed/module_inject/__init__.py", line 6, in <module>
+    from .replace_module import replace_transformer_layer, revert_transformer_layer, ReplaceWithTensorSlicing, GroupQuantizer, generic_injection
+  File "/opt/conda/lib/python3.10/site-packages/deepspeed/module_inject/replace_module.py", line 607, in <module>
+    from ..pipe import PipelineModule
+  File "/opt/conda/lib/python3.10/site-packages/deepspeed/pipe/__init__.py", line 6, in <module>
+    from ..runtime.pipe import PipelineModule, LayerSpec, TiedLayerSpec
+  File "/opt/conda/lib/python3.10/site-packages/deepspeed/runtime/pipe/__init__.py", line 6, in <module>
+    from .module import PipelineModule, LayerSpec, TiedLayerSpec
+  File "/opt/conda/lib/python3.10/site-packages/deepspeed/runtime/pipe/module.py", line 19, in <module>
+    from ..activation_checkpointing import checkpointing
+  File "/opt/conda/lib/python3.10/site-packages/deepspeed/runtime/activation_checkpointing/checkpointing.py", line 26, in <module>
+    from deepspeed.runtime.config import DeepSpeedConfig
+  File "/opt/conda/lib/python3.10/site-packages/deepspeed/runtime/config.py", line 42, in <module>
+    from ..elasticity import (
+  File "/opt/conda/lib/python3.10/site-packages/deepspeed/elasticity/__init__.py", line 10, in <module>
+    from .elastic_agent import DSElasticAgent
+  File "/opt/conda/lib/python3.10/site-packages/deepspeed/elasticity/elastic_agent.py", line 9, in <module>
+    from torch.distributed.elastic.agent.server.api import log, _get_socket_with_port
+ImportError: cannot import name 'log' from 'torch.distributed.elastic.agent.server.api' (/opt/conda/lib/python3.10/site-packages/torch/distributed/elastic/agent/server/api.py)
