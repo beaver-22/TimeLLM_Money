@@ -307,6 +307,39 @@ for ii in range(args.itr):
 
 accelerator.wait_for_everyone()
 if accelerator.is_local_main_process:
+    model.eval()
+    preds = []
+    trues = []
+
+    for i, (batch_x, batch_y, batch_x_mark, batch_y_mark) in enumerate(test_loader):
+        batch_x = batch_x.float().to(accelerator.device)
+        batch_y = batch_y.float().to(accelerator.device)
+        batch_x_mark = batch_x_mark.float().to(accelerator.device)
+        batch_y_mark = batch_y_mark.float().to(accelerator.device)
+
+        dec_inp = torch.zeros_like(batch_y[:, -args.pred_len:, :]).float().to(accelerator.device)
+        dec_inp = torch.cat([batch_y[:, :args.label_len, :], dec_inp], dim=1).float()
+
+        with torch.no_grad():
+            output = model(batch_x, batch_x_mark, dec_inp, batch_y_mark)
+
+        f_dim = -1 if args.features == 'MS' else 0
+        pred = output[:, -args.pred_len:, f_dim:].detach().cpu().numpy()
+        true = batch_y[:, -args.pred_len:, f_dim:].detach().cpu().numpy()
+
+        preds.append(pred)
+        trues.append(true)
+
+    preds = np.concatenate(preds, axis=0)
+    trues = np.concatenate(trues, axis=0)
+
+    result_path = f'./results/{args.model_id}_{args.pred_len}_{args.model_comment}'
+    os.makedirs(result_path, exist_ok=True)
+
+    np.save(os.path.join(result_path, 'pred.npy'), preds)
+    np.save(os.path.join(result_path, 'true.npy'), trues)
+    print(f"Saved predictions to {result_path}")
+
     path = './checkpoints'  # unique checkpoint saving path
     if args.use_wandb:
         wandb.finish()
