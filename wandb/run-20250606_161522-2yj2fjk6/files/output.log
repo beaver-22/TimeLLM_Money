@@ -1,0 +1,29 @@
+Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+Traceback (most recent call last):
+  File "/container/volume_data/Time-LLM/run_main.py", line 152, in <module>
+    model = TimeLLM.Model(args).float()
+  File "/container/volume_data/Time-LLM/models/TimeLLM.py", line 88, in __init__
+    self.llama_config = LlamaConfig.from_pretrained(llama3_name, trust_remote_code=True, use_auth_token=True)
+  File "/opt/conda/lib/python3.10/site-packages/transformers/configuration_utils.py", line 597, in from_pretrained
+    return cls.from_dict(config_dict, **kwargs)
+  File "/opt/conda/lib/python3.10/site-packages/transformers/configuration_utils.py", line 744, in from_dict
+    config = cls(**config_dict)
+  File "/opt/conda/lib/python3.10/site-packages/transformers/models/llama/configuration_llama.py", line 145, in __init__
+    self._rope_scaling_validation()
+  File "/opt/conda/lib/python3.10/site-packages/transformers/models/llama/configuration_llama.py", line 163, in _rope_scaling_validation
+    raise ValueError(
+ValueError: `rope_scaling` must be a dictionary with with two fields, `name` and `factor`, got {'factor': 8.0, 'low_freq_factor': 1.0, 'high_freq_factor': 4.0, 'original_max_position_embeddings': 8192, 'rope_type': 'llama3'}
+Traceback (most recent call last):
+  File "/container/volume_data/Time-LLM/run_main.py", line 152, in <module>
+    model = TimeLLM.Model(args).float()
+  File "/container/volume_data/Time-LLM/models/TimeLLM.py", line 88, in __init__
+    self.llama_config = LlamaConfig.from_pretrained(llama3_name, trust_remote_code=True, use_auth_token=True)
+  File "/opt/conda/lib/python3.10/site-packages/transformers/configuration_utils.py", line 597, in from_pretrained
+    return cls.from_dict(config_dict, **kwargs)
+  File "/opt/conda/lib/python3.10/site-packages/transformers/configuration_utils.py", line 744, in from_dict
+    config = cls(**config_dict)
+  File "/opt/conda/lib/python3.10/site-packages/transformers/models/llama/configuration_llama.py", line 145, in __init__
+    self._rope_scaling_validation()
+  File "/opt/conda/lib/python3.10/site-packages/transformers/models/llama/configuration_llama.py", line 163, in _rope_scaling_validation
+    raise ValueError(
+ValueError: `rope_scaling` must be a dictionary with with two fields, `name` and `factor`, got {'factor': 8.0, 'low_freq_factor': 1.0, 'high_freq_factor': 4.0, 'original_max_position_embeddings': 8192, 'rope_type': 'llama3'}

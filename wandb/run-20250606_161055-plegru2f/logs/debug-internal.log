@@ -1,0 +1,15 @@
+{"time":"2025-06-06T16:10:55.25258718+09:00","level":"INFO","msg":"stream: starting","core version":"0.19.9","symlink path":"/container/volume_data/Time-LLM/wandb/run-20250606_161055-plegru2f/logs/debug-core.log"}
+{"time":"2025-06-06T16:10:55.69908363+09:00","level":"INFO","msg":"created new stream","id":"plegru2f"}
+{"time":"2025-06-06T16:10:55.699196582+09:00","level":"INFO","msg":"stream: started","id":"plegru2f"}
+{"time":"2025-06-06T16:10:55.699238371+09:00","level":"INFO","msg":"writer: Do: started","stream_id":"plegru2f"}
+{"time":"2025-06-06T16:10:55.699317027+09:00","level":"INFO","msg":"handler: started","stream_id":"plegru2f"}
+{"time":"2025-06-06T16:10:55.699367111+09:00","level":"INFO","msg":"sender: started","stream_id":"plegru2f"}
+{"time":"2025-06-06T16:10:56.024251165+09:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-06-06T16:10:58.255742286+09:00","level":"INFO","msg":"stream: closing","id":"plegru2f"}
+{"time":"2025-06-06T16:10:58.255801819+09:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-06-06T16:10:58.255916264+09:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-06-06T16:10:59.071404759+09:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-06-06T16:10:59.466044648+09:00","level":"INFO","msg":"handler: closed","stream_id":"plegru2f"}
+{"time":"2025-06-06T16:10:59.466126296+09:00","level":"INFO","msg":"writer: Close: closed","stream_id":"plegru2f"}
+{"time":"2025-06-06T16:10:59.466174796+09:00","level":"INFO","msg":"sender: closed","stream_id":"plegru2f"}
+{"time":"2025-06-06T16:10:59.466371361+09:00","level":"INFO","msg":"stream: closed","id":"plegru2f"}

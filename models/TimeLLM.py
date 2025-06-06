@@ -2,8 +2,9 @@ from math import sqrt
 
 import torch
 import torch.nn as nn
+import os
 
-from transformers import LlamaConfig, LlamaModel, LlamaTokenizer, GPT2Config, GPT2Model, GPT2Tokenizer, BertConfig, \
+from transformers import LlamaConfig, LlamaModel, LlamaTokenizer, AutoTokenizer, AutoModelForCausalLM, GPT2Config, GPT2Model, GPT2Tokenizer, BertConfig, \
     BertModel, BertTokenizer
 from layers.Embed import PatchEmbedding
 import transformers
@@ -40,7 +41,7 @@ class Model(nn.Module):
         self.patch_len = configs.patch_len
         self.stride = configs.stride
 
-        if configs.llm_model == 'LLAMA':
+        if configs.llm_model == 'LLAMA2':
             # self.llama_config = LlamaConfig.from_pretrained('/mnt/alps/modelhub/pretrained_model/LLaMA/7B_hf/')
             self.llama_config = LlamaConfig.from_pretrained('huggyllama/llama-7b')
             self.llama_config.num_hidden_layers = configs.llm_layers
@@ -72,6 +73,7 @@ class Model(nn.Module):
                     trust_remote_code=True,
                     local_files_only=True
                 )
+            
             except EnvironmentError:  # downloads the tokenizer from HF if not already done
                 print("Local tokenizer files not found. Atempting to download them..")
                 self.tokenizer = LlamaTokenizer.from_pretrained(
@@ -80,6 +82,48 @@ class Model(nn.Module):
                     trust_remote_code=True,
                     local_files_only=False
                 )
+        elif configs.llm_model == 'LLAMA3.1':
+            # 1) Llama 3.1 8B 허브 이름 혹은 로컬 경로
+            llama3_name = 'meta-llama/Llama-3.1-8B'
+            self.llama_config = LlamaConfig.from_pretrained(llama3_name, trust_remote_code=True, use_auth_token=True)
+            self.llama_config.output_attentions = True
+            self.llama_config.output_hidden_states = True
+
+            # 3) Model 로드
+            try:
+                self.llm_model = LlamaModel.from_pretrained(
+                    llama3_name,
+                    trust_remote_code=True,
+                    local_files_only=True, 
+                    config=self.llama_config
+                )
+            except EnvironmentError:
+                print("Local Llama 3.1 8B not found. Downloading...")
+                self.llm_model = LlamaModel.from_pretrained(
+                    llama3_name,
+                    trust_remote_code=True,
+                    local_files_only=False,
+                    use_auth_token=True,
+                    config=self.llama_config
+                )
+
+            # 4) Tokenizer 로드
+            try:
+                self.tokenizer = AutoTokenizer.from_pretrained(
+                    llama3_name,
+                    trust_remote_code=True,
+                    local_files_only=True,
+                    use_auth_token=True
+                )
+            except EnvironmentError:
+                print("Local Llama 3.1 8B tokenizer not found. Downloading...")
+                self.tokenizer = AutoTokenizer.from_pretrained(
+                    llama3_name,
+                    trust_remote_code=True,
+                    use_auth_token=True,
+                    local_files_only=False
+                )
+        
         elif configs.llm_model == 'GPT2':
             self.gpt2_config = GPT2Config.from_pretrained('openai-community/gpt2')
 

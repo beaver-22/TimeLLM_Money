@@ -1,0 +1,12 @@
+Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+Loading checkpoint shards: 100%|█████████████████████████████████████| 2/2 [00:01<00:00,  1.12it/s]
+>> One epoch will run 5907 iterations
+6it [00:05,  1.14it/s]
+Traceback (most recent call last):
+  File "/container/volume_data/Time-LLM/run_main.py", line 235, in <module>
+    train_loss.append(loss.item())
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "/container/volume_data/Time-LLM/run_main.py", line 235, in <module>
+    train_loss.append(loss.item())
+KeyboardInterrupt

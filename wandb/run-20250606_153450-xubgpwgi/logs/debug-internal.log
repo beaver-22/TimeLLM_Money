@@ -1,0 +1,15 @@
+{"time":"2025-06-06T15:34:50.335327616+09:00","level":"INFO","msg":"stream: starting","core version":"0.19.9","symlink path":"/container/volume_data/Time-LLM/wandb/run-20250606_153450-xubgpwgi/logs/debug-core.log"}
+{"time":"2025-06-06T15:34:50.813755669+09:00","level":"INFO","msg":"created new stream","id":"xubgpwgi"}
+{"time":"2025-06-06T15:34:50.813893531+09:00","level":"INFO","msg":"stream: started","id":"xubgpwgi"}
+{"time":"2025-06-06T15:34:50.813970923+09:00","level":"INFO","msg":"writer: Do: started","stream_id":"xubgpwgi"}
+{"time":"2025-06-06T15:34:50.814010933+09:00","level":"INFO","msg":"sender: started","stream_id":"xubgpwgi"}
+{"time":"2025-06-06T15:34:50.814077216+09:00","level":"INFO","msg":"handler: started","stream_id":"xubgpwgi"}
+{"time":"2025-06-06T15:34:51.175524665+09:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-06-06T15:36:00.210371188+09:00","level":"INFO","msg":"stream: closing","id":"xubgpwgi"}
+{"time":"2025-06-06T15:36:00.210474286+09:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-06-06T15:36:00.21059805+09:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-06-06T15:36:01.034318067+09:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-06-06T15:36:01.432504868+09:00","level":"INFO","msg":"handler: closed","stream_id":"xubgpwgi"}
+{"time":"2025-06-06T15:36:01.432568019+09:00","level":"INFO","msg":"writer: Close: closed","stream_id":"xubgpwgi"}
+{"time":"2025-06-06T15:36:01.432616688+09:00","level":"INFO","msg":"sender: closed","stream_id":"xubgpwgi"}
+{"time":"2025-06-06T15:36:01.432799351+09:00","level":"INFO","msg":"stream: closed","id":"xubgpwgi"}

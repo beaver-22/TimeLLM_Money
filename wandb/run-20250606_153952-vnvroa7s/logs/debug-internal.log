@@ -1,0 +1,15 @@
+{"time":"2025-06-06T15:39:52.394852407+09:00","level":"INFO","msg":"stream: starting","core version":"0.19.9","symlink path":"/container/volume_data/Time-LLM/wandb/run-20250606_153952-vnvroa7s/logs/debug-core.log"}
+{"time":"2025-06-06T15:39:52.864534165+09:00","level":"INFO","msg":"created new stream","id":"vnvroa7s"}
+{"time":"2025-06-06T15:39:52.864733914+09:00","level":"INFO","msg":"stream: started","id":"vnvroa7s"}
+{"time":"2025-06-06T15:39:52.864778605+09:00","level":"INFO","msg":"handler: started","stream_id":"vnvroa7s"}
+{"time":"2025-06-06T15:39:52.864877874+09:00","level":"INFO","msg":"writer: Do: started","stream_id":"vnvroa7s"}
+{"time":"2025-06-06T15:39:52.864882368+09:00","level":"INFO","msg":"sender: started","stream_id":"vnvroa7s"}
+{"time":"2025-06-06T15:39:53.312101882+09:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-06-06T15:40:26.840129478+09:00","level":"INFO","msg":"stream: closing","id":"vnvroa7s"}
+{"time":"2025-06-06T15:40:26.840193316+09:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-06-06T15:40:26.84027135+09:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-06-06T15:40:27.670297537+09:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-06-06T15:40:28.102940233+09:00","level":"INFO","msg":"handler: closed","stream_id":"vnvroa7s"}
+{"time":"2025-06-06T15:40:28.10303334+09:00","level":"INFO","msg":"sender: closed","stream_id":"vnvroa7s"}
+{"time":"2025-06-06T15:40:28.103033146+09:00","level":"INFO","msg":"writer: Close: closed","stream_id":"vnvroa7s"}
+{"time":"2025-06-06T15:40:28.10326023+09:00","level":"INFO","msg":"stream: closed","id":"vnvroa7s"}
